@@ -1,0 +1,11 @@
+# env file
+.env
+
+# module
+__pycache__/
+
+# misc
+.DS_Store
+
+# data folder
+data/
