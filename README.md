@@ -17,7 +17,42 @@
 
 ThinkAi is a Python-based LLM App trained on philosophy research that can answer questions on philosophy using Chroma's Vector Search, HuggingFace tokenizers for text chunking, Meta's `bart-large-cnn` model for summarizing, and OpenAI's `gpt-3.5-turbo` model for structuring the final response. This is wrapped with a NextJS web app, code here - [ThinkAi UI](https://github.com/maanvithag/think-ai-ui)
 
-### Basic User Flow:
+# Basic User Flow:
+Here is how ThinkAi processes each user query;
+* User pings the [web client](http://thinkai.live/) with a query.
+* Chroma DB creates embeddings for this query
+* Using vector search, Chroma DB pulls the closest top 3 articles for the query
+* The summaries for these articles is pulled from the preprocessed `JSON` file from below and are combined by simple concatenation
+* The combined text is included in prompt for `OpenAI GPT model`
+* API call to OpenAI `gpt-3.5-turbo` model and get response
+* Response is sent back to the user
 <p align="center">
-<img src="assets/userflow.jpeg" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
+<img src="assets/userflow.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
 </p>
+
+## Preprocessing Steps
+1. [Data Collection](#data-collection)
+2. [Create Embeddings](#create-embeddings)
+3. [Summarize each article](#summarize)
+
+Code for all the preprocessing step - COMING SOON!
+
+# Preprocessing: Data Collection <a name="data-collection"></a>
+All the data has been collected from articles published and owned by [Stanford Encyclopedia of Philosphy](https://plato.stanford.edu). Using `beautifulsoup`, all scraped pages were dumped into files which were then cleaned removing noise like html tags, media, etc. and structured into `JSON` files.
+<p align="center">
+<img src="assets/datacollection.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
+</p>
+
+# Preprocessing: Create Embeddings <a name="create-embeddings"></a>
+Using [Chroma DB](https://www.trychroma.com), embeddings are created on the entire text of each article with an index on the URL of each article. For a given query, Chroma creates embeddings and then using Vector search, Chroma pulls out the closest top 3 articles for the given query.
+<p align="center">
+<img src="assets/chromaembeddings.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
+</p> 
+
+# Preprocessing: Summarize each article <a name="summarize"></a>
+There are a lot of summarization models, however, the max token size is at 1024 tokens for summarizing any text. This does not fit the use case since the text here is at least a couple of pages long. Right now, the only method for long text summarization is to chunk text, summarize individually, and combine again. Each `JSON` file is broken into chunks of `1000 tokens` using [LangChain's Text Splitters](https://python.langchain.com/docs/modules/data_connection/document_transformers/). These chunks are individually summarized using [Meta's BART model](https://arxiv.org/abs/1910.13461) published on [HuggingFace](https://huggingface.co/facebook/bart-large-cnn). Finally, these individual summaries are combined together by simple concatenation.
+<p align="center">
+<img src="assets/summarize.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
+</p>
+
+All the generated summaries for each article is stored in a `JSON` file for fast access.
