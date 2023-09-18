@@ -1,6 +1,8 @@
-<p align="center">
+<!-- <p align="center">
 <img src="assets/logo.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
-</p>
+</p> -->
+
+![](assets/thinkai-demo.gif)
 
 # ThinkAi
 
@@ -26,10 +28,10 @@ Performance evaluation of ThinkAI with ChatGPT here: [ThinkAI v. ChatGPT](docs/t
 <img src="assets/thinkai.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
 </p> 
 
-## ThinkAI WebApp:
+<!-- ## ThinkAI WebApp:
 Try now for free: http://thinkai.live/
 <br/><br/>
-![](assets/thinkai-demo.gif)
+![](assets/thinkai-demo.gif) -->
 
 ## Contents
 1. [Basic User Flow](#user-flow)
