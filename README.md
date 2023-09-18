@@ -28,11 +28,6 @@ Performance evaluation of ThinkAI with ChatGPT here: [ThinkAI v. ChatGPT](docs/t
 <img src="assets/thinkai.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
 </p> 
 
-<!-- ## ThinkAI WebApp:
-Try now for free: http://thinkai.live/
-<br/><br/>
-![](assets/thinkai-demo.gif) -->
-
 ## Contents
 1. [Basic User Flow](#user-flow)
 2. [Data Collection](#data-collection)
