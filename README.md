@@ -2,7 +2,7 @@
 <img src="assets/logo.png" alt="ThinkAi" style="display: block; margin: auto; background-color: transparent;">
 </p> -->
 
-![](assets/thinkai-demo.gif)
+![](assets/thinkai-demo2.gif)
 
 # ThinkAi
 
